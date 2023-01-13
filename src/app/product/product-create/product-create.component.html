@@ -1,1 +1,31 @@
 <p>product-create works!</p>
+<div *ngIf="submitted">
+    <h3>Product crée avec succés!</h3>
+</div>
+<div style="width: 500px; margin: auto;">
+    <div class="submit-form">
+        <div *ngIf="!submitted">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" required [(ngModel)]="product.name" name="name"
+                    ngModel />
+            </div>
+            <div class="form-group">
+                <label for="salary">Description</label>
+                <input type="text" class="form-control" id="description" required [(ngModel)]="product.description" name="description"
+                    ngModel />
+            </div>
+            <div class="form-group">
+                <label for="fonction">Buying_price</label>
+                <input type="text" class="form-control" id="buying_price" required [(ngModel)]="product.buying_price"
+                    name="fonction" />
+            </div>
+            <button (click)="createProduct()" class="btn btnsuccess">Create</button>
+        </div>
+        <div class="form-group">
+            <div class="alert alert-danger" role="alert">
+                Login failed: {{ message }}
+            </div>
+        </div>
+    </div>
+</div>

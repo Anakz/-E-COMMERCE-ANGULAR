@@ -1,1 +1,41 @@
 <p>product-list works!</p>
+<br>
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Buying_price</th>
+                <th scope="col">Selling_price</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Id_category</th>
+                <th scope="col">Basket</th>
+                <th scope="col">Order</th>
+                <th scope="col">Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr employee-detail *ngFor="let product of products" (click)="goToProductDetail(product.id)">
+                <th scope="row">{{product.id}}</th>
+                <td>{{product.name}}</td>
+                <td>{{product.description}}</td>
+                <td>{{product.buying_price}}</td>
+                <td>{{product.selling_price}}</td>
+                <td>{{product.stock}}</td>
+                <td>{{product.weight}}</td>
+                <td>{{product.id_category}}</td>
+                <td>{{product.basket}}</td>
+                <td>{{product.order}}</td>
+                <td>{{product.image}}</td>
+            </tr>
+            <tr>
+                <a [routerLink]="['/',{ outlets: { primary: ['navbar'],contenu: ['create'] } }]" *ngIf="isAdmin">
+                    Nouveau employé
+                </a>
+            </tr>
+        </tbody>
+    </table>
+</div>

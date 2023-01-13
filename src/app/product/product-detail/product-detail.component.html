@@ -1,1 +1,12 @@
 <p>product-detail works!</p>
+
+<a href="#" class="btn btn-primary" (click)="goProductList()">Product List</a>
+
+<div class="card" style="width: 18rem;">
+    <img src="" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{selectedProduct.name}}</h5>
+        <p class="card-text">{{selectedProduct.description}}</p>
+        <a href="#" class="btn btn-primary" (click)="goProductList()">Go somewhere</a>
+    </div>
+</div>
