@@ -6,6 +6,8 @@ import { ProductListComponent } from './product/product-list/product-list.compon
 import { NavbarComponent } from './navbar/navbar.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { SearchbarComponent } from './searchbar/searchbar.component';
 
 const routes: Routes = [
 
@@ -16,7 +18,8 @@ const routes: Routes = [
   { path: 'products', component: ProductListComponent },
   { path: 'product-detail', component: ProductDetailComponent },
   { path: 'welcome', component: WelcomeComponent },
-  { path: 'logout', component: AuthComponent }
+  { path: 'logout', component: AuthComponent },
+  { path: 'searchbar', component: SearchbarComponent },
 
 
 ];

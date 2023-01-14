@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { Product } from 'src/app/model/product';
+import { BasketService } from 'src/app/services/basket.service';
 import { ProductService } from 'src/app/services/product.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
@@ -21,6 +22,7 @@ export class ProductListComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+    private basketService: BasketService,
     private tokenStorageService: TokenStorageService,
     private router: Router
   ) { }
@@ -48,6 +50,10 @@ export class ProductListComponent implements OnInit {
       }
     };
     this.router.navigate(['/product-detail'], navigationExtras);
+  }
+  addToBasket(id:string){
+    console.log(id)
+    
   }
 
 }

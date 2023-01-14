@@ -1,7 +1,7 @@
-<p>product-list works!</p>
-<br>
+<!-- <p>product-list works!</p> -->
+
 <div class="container">
-    <table class="table">
+    <!-- <table class="table">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Id</th>
@@ -18,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr employee-detail *ngFor="let product of products" (click)="goToProductDetail(product.id)">
+            <tr employee-detail *ngFor="let product of products" (click)="goToProductDetail(product.id)" role="button" class="hover:bg-hover trans-ease-out cursor-pointer">
                 <th scope="row">{{product.id}}</th>
                 <td>{{product.name}}</td>
                 <td>{{product.description}}</td>
@@ -26,7 +26,7 @@
                 <td>{{product.selling_price}}</td>
                 <td>{{product.stock}}</td>
                 <td>{{product.weight}}</td>
-                <td>{{product.id_category}}</td>
+                <td>{{product.category.name}}</td>
                 <td>{{product.basket}}</td>
                 <td>{{product.order}}</td>
                 <td>{{product.image}}</td>
@@ -37,5 +37,23 @@
                 </a>
             </tr>
         </tbody>
-    </table>
+    </table> -->
+    <div class="row mb-5">
+        <div class="col-4" *ngFor="let product of products" role="button">
+            <div class="card mb-5" style="width: 18rem;"  (click)="goToProductDetail(product.id); $event.stopPropagation();">
+                <div class="position-relative">
+                    <img src={{product.images[0].img}} style="height: 200px;" class="card-img-top rounded float-start" alt={{product.name}}>
+                    <div class="d-flex justify-content-between position-absolute" style="top: 50%; left: 10%;">
+                        <a class="m-5" href=""><i style="color: #EF7F2D;" class="fa-solid fa-circle-info fa-2x  my-hover"></i></a>
+                        <a (click)="addToBasket(product.id)" class="m-5" href=""><i style="color: #EF7F2D;" class="fa-sharp fa-solid fa-cart-plus fa-2x"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{product.name}}</h5>
+                    <!-- <p class="card-text">{{product.description}}</p> -->
+                    <!-- <a href="#" class="btn btn-primary" (click)="goProductList()">Go somewhere</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

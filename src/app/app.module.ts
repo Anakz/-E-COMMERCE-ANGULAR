@@ -11,6 +11,12 @@ import { ProductListComponent } from './product/product-list/product-list.compon
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { ProductCreateComponent } from './product/product-create/product-create.component';
 import { AuthComponent } from './auth/auth.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { SearchbarComponent } from './searchbar/searchbar.component';
+import { BasketListComponent } from './basket/basket-list/basket-list.component';
+import { BasketCreateComponent } from './basket/basket-create/basket-create.component';
+import { BasketDetailComponent } from './basket/basket-detail/basket-detail.component';
+import { BasketUpdateComponent } from './basket/basket-update/basket-update.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +26,13 @@ import { AuthComponent } from './auth/auth.component';
     ProductListComponent,
     ProductDetailComponent,
     ProductCreateComponent,
-    AuthComponent
+    AuthComponent,
+    SidebarComponent,
+    SearchbarComponent,
+    BasketListComponent,
+    BasketCreateComponent,
+    BasketDetailComponent,
+    BasketUpdateComponent
   ],
   imports: [
     BrowserModule,
