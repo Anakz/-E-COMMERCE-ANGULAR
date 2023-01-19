@@ -1,3 +1,96 @@
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div  class="p-2 mb-4">CATEGORIES</div>
+            <ul class="list-group list-group-flush m-2 p-2">
+                <li role="button" class="list-group-item list-group-item-action"><a class="text-decoration-none" routerLink="products">All</a></li>
+                <li role="button " *ngFor="let category of allCategories" class="list-group-item list-group-item-action">
+                    <a class="text-decoration-none" routerLink="/products/{{category.name}}">{{category.name}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- <div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-5 px-0 ">
+            <div class="d-flex flex-column align-items-center align-items-sm-start  text-white min-vh-60">
+                <br>
+                <a href="./products" class="d-flex align-items-center pb-2 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline" style="color: #EF7F2D;"> <strong>Categories</strong> </span>
+                </a>
+                <ul class="nav nav-pills flex-column align-items-center align-items-sm-start" id="menu">
+                    <li  *ngFor="let category of allCategories" style="margin-bottom: -32px; ">
+                        <a role="button" class="nav-link align-middle px-0 " style="color: #EF7F2D;">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">{{category.name}}</span>
+                            <hr style="border: 1px solid #EF7F2D; width: 200px;" >
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr>
+            </div>
+        </div>
+        
+    </div>
+</div> -->
+
+<!-- <li class="nav-item">
+    <a href="#" class="nav-link align-middle px-0" style="color: #EF7F2D;">
+        <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Sheo</span>
+    </a>
+    <hr style="border: 1px solid #EF7F2D; width: 200px;" >
+</li>
+<li class="nav-item">
+    <a href="#" class="nav-link align-middle px-0" style="color: #EF7F2D;">
+        <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Clothe</span>
+    </a>
+    <hr style="border: 1px solid #EF7F2D; width: 200px;" >
+</li>
+<li class="nav-item">
+    <a href="#" class="nav-link align-middle px-0" style="color: #EF7F2D;">
+        <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Television</span>
+    </a>
+    <hr style="border: 1px solid #EF7F2D; width: 200px;" >
+</li>
+<li class="nav-item">
+    <a href="#" class="nav-link align-middle px-0" style="color: #EF7F2D;">
+        <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Computer</span>
+    </a>
+    <hr style="border: 1px solid #EF7F2D; width: 200px;" >
+</li>
+<li class="nav-item">
+    <a href="#" class="nav-link align-middle px-0" style="color: #EF7F2D;">
+        <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Laptop</span>
+    </a>
+    <hr style="border: 1px solid #EF7F2D; width: 200px;" >
+</li>
+<li class="nav-item">
+    <a href="#" class="nav-link align-middle px-0" style="color: #EF7F2D;">
+        <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Accessories</span>
+    </a>
+    <hr style="border: 1px solid #EF7F2D; width: 200px;" >
+</li>
+<li class="nav-item">
+    <a href="#" class="nav-link align-middle px-0" style="color: #EF7F2D;">
+        <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Watch</span>
+    </a>
+    <hr style="border: 1px solid #EF7F2D; width: 200px;" >
+</li>                    
+<li>
+    <a href="#" class="nav-link px-0 align-middle" style="color: #EF7F2D;">
+        <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Bag</span> 
+    </a>
+    <hr style="border: 1px solid #EF7F2D; width: 200px;" >
+</li>
+<li>
+    <a href="#" class="nav-link px-0 align-middle" style="color: #EF7F2D;">
+        <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Beauty</span> 
+    </a>
+</li> -->
+
 <!-- <p>sidebar works!</p>-->
 
   <!-- <div class="col-auto col-md-3 col-xl-2 px-sm-5 px-0 bg-dark">
@@ -61,71 +154,7 @@
     </div>
 </div> -->
 
-  <div class="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-5 px-0 ">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-60">
-                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline">Categories</span>
-                </a>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0 text-white">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">phone</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0 text-white">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Sheo</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0 text-white">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Clothe</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0 text-white">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Television</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0 text-white">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Computer</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0 text-white">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Laptop</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0 text-white">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Accessories</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0 text-white">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Watch</span>
-                        </a>
-                    </li>                    
-                    <li>
-                        <a href="#" class="nav-link px-0 align-middle text-white">
-                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Bag</span> 
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-0 align-middle text-white">
-                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Beauty</span> 
-                        </a>
-                    </li>
-                </ul>
-                <hr>
-            </div>
-        </div>
-        
-    </div>
-</div>
+  
 
 <!-- <div class="col py-3">
             Content area...

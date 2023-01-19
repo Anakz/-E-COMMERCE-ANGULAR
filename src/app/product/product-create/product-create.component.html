@@ -1,8 +1,15 @@
-<p>product-create works!</p>
+<!-- <p>product-create works!</p> -->
+
+<!-- <a class="btn mb-5" style="color: #EF7F2D;" (click)="goProductList()">Product List</a> -->
+
 <div *ngIf="submitted">
     <h3>Product crée avec succés!</h3>
 </div>
-<div style="width: 500px; margin: auto;">
+<br>
+<h4> <strong>Create new product :</strong> </h4>
+<br>
+<div class="card" style="width: 32rem; margin-left: 200px">
+<div style="width: 350px; margin: auto;">
     <div class="submit-form">
         <div *ngIf="!submitted">
             <div class="form-group">
@@ -16,16 +23,39 @@
                     ngModel />
             </div>
             <div class="form-group">
-                <label for="fonction">Buying_price</label>
+                <label for="fonction">Buying price</label>
                 <input type="text" class="form-control" id="buying_price" required [(ngModel)]="product.buying_price"
                     name="fonction" />
             </div>
-            <button (click)="createProduct()" class="btn btnsuccess">Create</button>
+            <!-- <div class="form-group">
+                <label for="selling_price">Seeling price</label>
+                <input type="text" class="form-control" id="selling_price" required [(ngModel)]="product.selling_price" name="selling_price" />
+            </div> -->
+            <div class="form-group">
+                <label for="stock">Stock</label>
+                <input type="number" class="form-control" id="stock" required [(ngModel)]="product.stock" name="selling_price" />
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight</label>
+                <input type="number" class="form-control" id="weight" required [(ngModel)]="product.weight" name="selling_price" />
+            </div>
+            <div class="form-group">
+                <label for="weight">Image</label>
+                <input type="text" class="form-control" id="weight" required [(ngModel)]="image.img" name="image" />
+            </div>
+            <div class="form-group">
+                <label for="weight">Id Category</label>
+                <input type="number" class="form-control" id="weight" required [(ngModel)]="selectedCategory" name="selectedCategory" />
+            </div>
+            <br>
+            <button (click)="createProduct()" class="btn" style="background-color: #EF7F2D; color: white;">Create</button>
         </div>
-        <div class="form-group">
+        <br>
+        <!-- <div class="form-group">
             <div class="alert alert-danger" role="alert">
                 Login failed: {{ message }}
             </div>
-        </div>
+        </div> -->
     </div>
+</div>
 </div>

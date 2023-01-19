@@ -1,59 +1,76 @@
 <!-- <p>product-list works!</p> -->
+<a class="btn mb-5" style="color: #EF7F2D;" (click)="goToProductCreate()">Add Product</a>
 
 <div class="container">
-    <!-- <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Buying_price</th>
-                <th scope="col">Selling_price</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Weight</th>
-                <th scope="col">Id_category</th>
-                <th scope="col">Basket</th>
-                <th scope="col">Order</th>
-                <th scope="col">Image</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr employee-detail *ngFor="let product of products" (click)="goToProductDetail(product.id)" role="button" class="hover:bg-hover trans-ease-out cursor-pointer">
-                <th scope="row">{{product.id}}</th>
-                <td>{{product.name}}</td>
-                <td>{{product.description}}</td>
-                <td>{{product.buying_price}}</td>
-                <td>{{product.selling_price}}</td>
-                <td>{{product.stock}}</td>
-                <td>{{product.weight}}</td>
-                <td>{{product.category.name}}</td>
-                <td>{{product.basket}}</td>
-                <td>{{product.order}}</td>
-                <td>{{product.image}}</td>
-            </tr>
-            <tr>
-                <a [routerLink]="['/',{ outlets: { primary: ['navbar'],contenu: ['create'] } }]" *ngIf="isAdmin">
-                    Nouveau employé
-                </a>
-            </tr>
-        </tbody>
-    </table> -->
-    <div class="row mb-5">
+
+    <div *ngIf="product_exist" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>product already existe in basket!</strong> You should check in on your Basket.
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+    </div>
+    <div *ngIf="!current_category" class="row mb-5">
         <div class="col-4" *ngFor="let product of products" role="button">
             <div class="card mb-5" style="width: 18rem;"  (click)="goToProductDetail(product.id); $event.stopPropagation();">
                 <div class="position-relative">
-                    <img src={{product.images[0].img}} style="height: 200px;" class="card-img-top rounded float-start" alt={{product.name}}>
-                    <div class="d-flex justify-content-between position-absolute" style="top: 50%; left: 10%;">
-                        <a class="m-5" href=""><i style="color: #EF7F2D;" class="fa-solid fa-circle-info fa-2x  my-hover"></i></a>
-                        <a (click)="addToBasket(product.id)" class="m-5" href=""><i style="color: #EF7F2D;" class="fa-sharp fa-solid fa-cart-plus fa-2x"></i></a>
+
+                    <div  *ngIf="product.images[0]; else hiddenText">
+                        <img src={{product.images[0].img}} style="height: 200px;" class="card-img-top rounded float-start" alt={{product.name}}>
+                    </div>
+                    <ng-template #hiddenText>
+                        <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/amazon-tech-products-2021-1635430982.jpg" style="height: 200px;" class="card-img-top rounded float-start" alt={{product.name}}>
+                    </ng-template>
+
+                    <div class="d-flex justify-content-between position-absolute" style="top: 80%; left: 20%;">
+                        <a (click)="goToProductDetail(product.id); $event.stopPropagation();" class="m-2"><i style="color: #EF7F2D;" class="fa-solid fa-circle-info fa-2x  my-hover"></i></a>
+                        <a (click)="updateBasket(product.id); $event.stopPropagation();" class="m-2" ><i style="color: #EF7F2D;" class="fa-sharp fa-solid fa-cart-plus fa-2x"></i></a>
+
+                        <a (click)="editProduct(product.id); $event.stopPropagation();" class="m-2" ><i style="color: #EF7F2D;" class="fa-solid fa-pen-to-square fa-2x"></i></a>
+                        <a (click)="deleteProduct(product.id); $event.stopPropagation();" class="m-2"><i style="color: #EF7F2D;" class="fa-solid fa-trash fa-2x  my-hover"></i></a>
+
                     </div>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{product.name}}</h5>
-                    <!-- <p class="card-text">{{product.description}}</p> -->
+                    <h5 class="card-title text-center">{{product.name}}</h5>
+                    <p class="card-text text-center">{{product.selling_price}} $</p>
                     <!-- <a href="#" class="btn btn-primary" (click)="goProductList()">Go somewhere</a> -->
                 </div>
             </div>
         </div>
+    </div>
+    <div *ngIf="current_category && allProduct.length >0" class="row mb-5">
+        <div class="col-4" *ngFor="let product of allProduct" role="button">
+            <div class="card mb-5" style="width: 18rem;"  (click)="goToProductDetail(product.id); $event.stopPropagation();">
+                <div class="position-relative">
+
+                    <div  *ngIf="product.images && product.images.length >0; else hiddenText">
+                        <img src={{product.images[0].img}} style="height: 200px;" class="card-img-top rounded float-start" alt={{product.name}}>
+                    </div>
+                    <ng-template #hiddenText>
+                        <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/amazon-tech-products-2021-1635430982.jpg" style="height: 200px;" class="card-img-top rounded float-start" alt={{product.name}}>
+                    </ng-template>
+
+                    <div class="d-flex justify-content-between position-absolute" style="top: 80%; left: 20%;">
+                        <a (click)="goToProductDetail(product.id); $event.stopPropagation();" class="m-2"><i style="color: #EF7F2D;" class="fa-solid fa-circle-info fa-2x  my-hover"></i></a>
+                        <a (click)="updateBasket(product.id); $event.stopPropagation();" class="m-2" ><i style="color: #EF7F2D;" class="fa-sharp fa-solid fa-cart-plus fa-2x"></i></a>
+
+                        <a (click)="editProduct(product.id); $event.stopPropagation();" class="m-2" ><i style="color: #EF7F2D;" class="fa-solid fa-pen-to-square fa-2x"></i></a>
+                        <a (click)="deleteProduct(product.id); $event.stopPropagation();" class="m-2"><i style="color: #EF7F2D;" class="fa-solid fa-trash fa-2x  my-hover"></i></a>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{product.name}}</h5>
+                    <p class="card-text text-center">{{product.selling_price}} $</p>
+                    <!-- <a href="#" class="btn btn-primary" (click)="goProductList()">Go somewhere</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center" *ngIf="current_category && allProduct.length == 0">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div>
+            no product was found with {{current_category}} category
+        </div> 
     </div>
 </div>

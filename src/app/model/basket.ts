@@ -1,4 +1,5 @@
 import { Product } from "./product";
+import { User } from "./user";
 
 export class Basket {
     constructor(
@@ -6,8 +7,9 @@ export class Basket {
         public date:Date,
         public quantity:number,
         public total_price:number,
-        public id_user:number,
-        public product:Product[],
+        public user:User,
+        public product:Array<Product>,
         public is_deleted:boolean
     ){}
+
 }
