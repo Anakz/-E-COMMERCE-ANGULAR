@@ -1,1 +1,20 @@
-<p>auth works!</p>
+
+<div class="container mb-5">
+    <div class="row">
+        <h4 class="text-center"> <strong>Login :</strong> </h4>
+        <div class="card p-5" style="width: 32rem; margin-left: 200px" >
+            <div class="form-group">
+                <label for="name">Email</label>
+                <input type="email" class="form-control" id="first_name" required [(ngModel)]="form.username" name="username" ngModel />
+            </div>
+            <div class="form-group mb-3">
+                <label for="name">Password</label>
+                <input type="password" class="form-control" id="first_name" required [(ngModel)]="form.password" name="password" ngModel />
+            </div>
+            <a type="submit" (click)="submit()" class="btn btn-primary fadeIn fourth" style="background-color: #EF7F2D; color: white;" >Log In</a>
+            <a role="button" (click)="goToRegister()" class="p-2" ><h6>Create an account ?</h6></a>
+            <div *ngIf="errorMessage" class="alert alert-danger" role="alert"> {{errorMessage}}</div>
+        </div>
+                        
+    </div>
+</div>

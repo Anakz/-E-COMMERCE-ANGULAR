@@ -1,1 +1,48 @@
 <p>basket-detail works!</p>
+
+<div *ngIf="products && products.length >0 ">
+    <br>
+    <div class="container">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Weight</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr product-detail *ngFor="let product of products">
+                    <td  *ngIf="product.images[0]; else hiddenText">
+                        <img src={{product.images[0].img}} style="width: 100px;" class="card-img-top rounded float-start" alt={{product.name}}>
+                    </td>
+                    <ng-template #hiddenText>
+                        <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/amazon-tech-products-2021-1635430982.jpg" style="height: 200px;" class="card-img-top rounded float-start" alt={{product.name}}>
+                    </ng-template>
+                    <td>{{product.name}}</td>
+                    <td>{{product.buying_price}}</td>
+                    <td>{{product.weight}}</td>
+                    <td>{{product.fonction}}</td>
+                </tr>
+                <tr>
+                    <!-- <a [routerLink]="['/',{ outlets: { primary: ['navbar'],contenu: ['create'] } }]" *ngIf="isAdmin">
+                        Nouveau employé
+                    </a> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="text-center" *ngIf="products && products.length ==0 ">
+    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <div>
+        no product was found in your cart shop
+    </div>
+</div>

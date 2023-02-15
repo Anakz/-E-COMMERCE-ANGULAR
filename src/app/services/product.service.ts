@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Product } from '../model/product';
 
 const API_GET_PRODUCTS = 'http://localhost:8088/api/product';
 
 const httpOptions = {
-headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+headers: new HttpHeaders({ 
+  'Content-Type': 'application/json'
+})
 };
 
 
@@ -28,7 +31,7 @@ export class ProductService {
   update(id: number, data: any): Observable<string> {
     return this.http.put<string>(`${API_GET_PRODUCTS}/${id}`, data,{responseType: 'text' as 'json'});
   }
-  delete(id: number, data: any): Observable<string> {
+  delete(id: number, data: Product): Observable<string> {
     return this.http.put<string>(`${API_GET_PRODUCTS+'/delete'}/${id}`, {responseType: 'text' as 'json'});
   }
   // delete(id: number): Observable<string> {

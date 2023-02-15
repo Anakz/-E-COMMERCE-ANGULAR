@@ -3,8 +3,7 @@
 <a class="btn mb-5" style="color: #EF7F2D;" (click)="goProductList()">Product List</a>
 
 
-
-<div class="container">
+<div class="container mb-5 mt-3">
     <div *ngIf="product_exist" class="alert alert-warning alert-dismissible fade show" role="alert">
         <strong>product already existe in basket!</strong> You should check in on your Basket.
         <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
@@ -63,8 +62,8 @@
                     <div class="d-flex justify-content-center">
                     <a class="btn" (click)="updateBasket(selectedProduct.id)"><i style="color: #EF7F2D;" class="fa-sharp fa-solid fa-cart-plus fa-2x"></i></a>
                     <!-- <a class="btn" ><i style="color: #EF7F2D;" class="fa-solid fa-circle-info fa-2x  my-hover"></i></a> -->
-                    <a class="btn" ><i style="color: #EF7F2D;" class="fa-solid fa-pen-to-square fa-2x  my-hover"></i></a>
-                    <a class="btn" ><i style="color: #EF7F2D;" class="fa-solid fa-trash fa-2x  my-hover"></i></a>
+                    <a *ngIf="isAdmin" class="btn" (click)="editProduct(selectedProduct.id)" ><i style="color: #EF7F2D;" class="fa-solid fa-pen-to-square fa-2x  my-hover"></i></a>
+                    <a *ngIf="isAdmin" class="btn" (click)="deleteProduct(selectedProduct.id)" ><i style="color: #EF7F2D;" class="fa-solid fa-trash fa-2x  my-hover"></i></a>
                     </div>
                 </div>
             </div>

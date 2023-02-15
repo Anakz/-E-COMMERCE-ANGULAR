@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from '../model/user';
 
 const API_GET_USERS = 'http://localhost:8088/api/user';
 
@@ -23,13 +24,19 @@ export class UserService {
   getById(id:string):Observable<any>{
     return this.http.get(`${API_GET_USERS}/${id}`);
   }
+  getByEmail(email:string):Observable<any>{
+    return this.http.get(`${API_GET_USERS+'/email'}/${email}`);
+  }
   create(data:any):Observable<any>{
     return this.http.post(API_GET_USERS, data, {responseType:'text' as 'json'})
   }
   update(id: number, data: any): Observable<string> {
     return this.http.put<string>(`${API_GET_USERS}/${id}`, data,{responseType: 'text' as 'json'});
   }
-  delete(id: number): Observable<string> {
-    return this.http.delete<string>(`${API_GET_USERS}/${id}`, {responseType: 'text' as 'json'});
+  delete(id: number, data: User): Observable<string> {
+    return this.http.put<string>(`${API_GET_USERS+'/delete'}/${id}`, {responseType: 'text' as 'json'});
   }
+  // delete(id: number): Observable<string> {
+  //   return this.http.delete<string>(`${API_GET_USERS}/${id}`, {responseType: 'text' as 'json'});
+  // }
 }

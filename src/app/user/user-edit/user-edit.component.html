@@ -1,0 +1,45 @@
+<!-- <p>user-edit works!</p> -->
+
+<div class="container mb-5">
+    <div class="row">
+        <div  *ngIf="isLoggedIn" class="card p-4" style="width: 32rem; margin-left: 200px" >
+            <h4 class="text-center mb-3" style="color: #EF7F2D;"> <strong>EDIT My Profile</strong> </h4>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1" style="width: 100px;">First Name</span>
+                <input type="text" class="form-control" placeholder="First Name" [(ngModel)]="user.first_name" name="first_name" aria-label="first_name" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1" style="width: 100px;">Last Name</span>
+                <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="user.last_name" name="last_name" aria-label="last_name" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1" style="width: 100px;">Email</span>
+                <input type="text" class="form-control" placeholder="email" [(ngModel)]="user.email" name="email" aria-label="email" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1" style="width: 100px;">Address</span>
+                <input type="text" class="form-control" placeholder="address" [(ngModel)]="user.address" name="address" aria-label="address" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1" style="width: 100px;">Phone</span>
+                <input type="text" class="form-control" placeholder="phone" [(ngModel)]="user.phone" name="phone" aria-label="phone" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1" style="width: 100px;">Credit Card</span>
+                <input type="text" class="form-control" placeholder="Credit Card" [(ngModel)]="user.credit_card" name="credit_card" aria-label="credit_card" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1" style="width: 100px;">Role</span>
+                <input type="text" class="form-control" disabled placeholder="Role" [(ngModel)]="user.role" name="role" aria-label="role" aria-describedby="basic-addon1">
+            </div>
+            <h4 class="text-center" style="color: #EF7F2D;"> 
+                <strong>
+                    <a type="submit" (click)="submit()" class="btn fadeIn fourth m-2" style="background-color: #EF7F2D; color: white;" >Confirm</a> <span class="text-dark">|</span>
+                    <a (click)="goToHome()" title="Home page" style="color: #EF7F2D;" class="m-2" role="button"><i class="fa-solid fa-house"></i></a>
+                </strong> 
+            </h4>
+        </div>
+                        
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<!-- <p>category-list works!</p> -->
+
+<a *ngIf="isAdmin" class="btn btn-outline mb-2" style="color: #EF7F2D;" (click)="goToCategoryCreate()">Add Category</a>
+
+
+<div class="container mb-5">
+    <div class="row">
+        <div  *ngIf="isAdmin" class="card p-4" style="width: 60rem; margin-left: 30px" >
+            <table class="table">
+                <thead>
+                    <tr style="color: #EF7F2D;">
+                        <th scope="col" style="color: #000;"></th>
+                        <th scope="col">Category Name</th>
+                        <th scope="col">Number Of Product</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let category of categories">
+                    <td></td>
+                    <td>{{category.name}}</td>
+                    <td>x{{category.products.length}}</td>
+                    <td>
+                        <a routerLink="/products/{{category.name}}" class="m-2"><i style="color: #EF7F2D;" class="fa-solid fa-circle-info fa-1x  my-hover"></i></a>
+                        <a role="button" (click)="editCategory(category.id); $event.stopPropagation();" class="m-2" ><i style="color: #EF7F2D;" class="fa-solid fa-pen-to-square fa-1x"></i></a>
+                        <a role="button" (click)="deleteCategory(category.id); $event.stopPropagation();" class="m-2"><i style="color: #EF7F2D;" class="fa-solid fa-trash fa-1x  my-hover"></i></a>
+
+                    </td>
+                    </tr>
+                </tbody>
+                </table>
+        </div>     
+    </div>
+    </div>
+    

@@ -1,0 +1,74 @@
+<!-- <p>product-edit works!</p> -->
+
+<div class="container mb-5">
+    
+    <div class="card p-3" style="width: 32rem; margin-left: 200px">
+        <div style="width: 350px; margin: auto;">
+            <h4 class="text-center"> <strong>Edit Product :</strong> </h4>
+            <div class="submit-form">
+                <div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" required [(ngModel)]="product.name" name="name" ngModel />
+                    </div>
+                    <div class="form-group">
+                        <label for="salary">Description</label>
+                        <input type="text" class="form-control" id="description" required [(ngModel)]="product.description"
+                            name="description" ngModel />
+                    </div>
+                    <div class="form-group">
+                        <label for="fonction">Buying price</label>
+                        <input type="text" class="form-control" id="buying_price" required
+                            [(ngModel)]="product.buying_price" name="fonction" />
+                    </div>
+                    <div class="form-group">
+                        <label for="stock">Stock</label>
+                        <input type="number" class="form-control" id="stock" required [(ngModel)]="product.stock"
+                            name="selling_price" />
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">Weight</label>
+                        <input type="number" class="form-control" id="weight" required [(ngModel)]="product.weight"
+                            name="selling_price" />
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">Image</label>
+                        <div *ngIf="product.images.length > 0; else hiddenText">
+                            <input type="text" class="form-control" id="weight" required [(ngModel)]="product.images[0].img" name="image" />
+                        </div>
+                        <ng-template #hiddenText >
+                            <input type="text" class="form-control" id="weight" required name="image" />
+                        </ng-template>
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">Id Category</label>
+                        <div *ngIf="product.category; else hiddenText">
+                        <select class="form-select" [(ngModel)]="product.category.id" id="floatingSelect" aria-label="Floating label select example">
+                                <!-- <input type="text" class="form-control" id="weight" required [(ngModel)]="product.category.name" name="selectedCategory" /> -->
+                                <option  *ngFor="let category of categories" value={{category.id}}>{{category.name}}</option>
+                            </select>
+                        </div>
+                        <ng-template #hiddenText >
+                            <!-- <input type="text" class="form-control" id="weight" required  name="selectedCategory" /> -->
+                            <option >No CATEGORY</option>
+                        </ng-template>
+                    </div>
+
+                    <!-- <div class="form-floating">
+                        <select class="form-select" [(ngModel)]="selectedCategory" id="floatingSelect" aria-label="Floating label select example">
+                          <option selected>Open this select menu</option>
+                          <option  *ngFor="let category of categories" value={{category.id}}>{{category.name}}</option>
+                        </select>
+                        <label for="floatingSelect">Choose a Category </label>
+                    </div> -->
+
+                    <br>
+                    <button (click)="updateProduct()" class="btn"
+                        style="background-color: #EF7F2D; color: white;">Create</button>
+                    <div *ngIf="errorMessage" class="alert alert-danger" role="alert"> {{errorMessage}}</div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>

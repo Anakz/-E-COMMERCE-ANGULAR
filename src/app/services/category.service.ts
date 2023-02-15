@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Category } from '../model/category';
 
 const API_GET_CATEGORY = 'http://localhost:8088/api/category';
 
@@ -22,7 +23,7 @@ export class CategoryService {
   getByName(name:string):Observable<any>{
     return this.http.get(`${API_GET_CATEGORY+'/name'}/${name}`)
   }
-  getById(id:string):Observable<any>{
+  getById(id:number):Observable<any>{
     return this.http.get(`${API_GET_CATEGORY}/${id}`);
   }
   create(data:any):Observable<any>{
@@ -31,7 +32,10 @@ export class CategoryService {
   update(id: number, data: any): Observable<string> {
     return this.http.put<string>(`${API_GET_CATEGORY}/${id}`, data,{responseType: 'text' as 'json'});
   }
-  delete(id: number): Observable<string> {
-    return this.http.delete<string>(`${API_GET_CATEGORY}/${id}`, {responseType: 'text' as 'json'});
+  delete(id: number, data: Category): Observable<string> {
+    return this.http.put<string>(`${API_GET_CATEGORY+'/delete'}/${id}`, {responseType: 'text' as 'json'});
   }
+  // delete(id: number): Observable<string> {
+  //   return this.http.delete<string>(`${API_GET_CATEGORY}/${id}`, {responseType: 'text' as 'json'});
+  // }
 }

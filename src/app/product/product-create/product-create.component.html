@@ -5,10 +5,12 @@
 <div *ngIf="submitted">
     <h3>Product crée avec succés!</h3>
 </div>
-<br>
+
+<div style="margin-top: -35px;">
+
 <h4> <strong>Create new product :</strong> </h4>
 <br>
-<div class="card" style="width: 32rem; margin-left: 200px">
+<div *ngIf="isLoggedIn && isAdminOrFournisseur" class="card mb-5" style="width: 32rem; margin-left: 200px">
 <div style="width: 350px; margin: auto;">
     <div class="submit-form">
         <div *ngIf="!submitted">
@@ -39,16 +41,26 @@
                 <label for="weight">Weight</label>
                 <input type="number" class="form-control" id="weight" required [(ngModel)]="product.weight" name="selling_price" />
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="weight">Image</label>
                 <input type="text" class="form-control" id="weight" required [(ngModel)]="image.img" name="image" />
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="weight">Id Category</label>
                 <input type="number" class="form-control" id="weight" required [(ngModel)]="selectedCategory" name="selectedCategory" />
+            </div> -->
+            <!--  -->
+            <div class="form-floating">
+                <select class="form-select" [(ngModel)]="selectedCategory" id="floatingSelect" aria-label="Floating label select example">
+                  <option selected>Open this select menu</option>
+                  <option  *ngFor="let category of categories" value={{category.id}}>{{category.name}}</option>
+                </select>
+                <label for="floatingSelect">Choose a Category </label>
             </div>
+            <!--  -->
             <br>
             <button (click)="createProduct()" class="btn" style="background-color: #EF7F2D; color: white;">Create</button>
+            <div *ngIf="errorMessage" class="alert alert-danger" role="alert"> {{errorMessage}}</div>
         </div>
         <br>
         <!-- <div class="form-group">
@@ -57,5 +69,6 @@
             </div>
         </div> -->
     </div>
+</div>
 </div>
 </div>

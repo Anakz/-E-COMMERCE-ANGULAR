@@ -1,0 +1,19 @@
+<!-- <p>category-create works!</p> -->
+<a *ngIf="isAdmin" class="btn mb-1" style="color: #EF7F2D;" (click)="goToCategoryList()">Category list</a>
+
+<div *ngIf="isAdmin"class="container mb-5">
+    <div class="row">
+        <div class="card p-5" style="width: 32rem; margin-left: 200px" >
+            <h4 class="text-center"> <strong>Create Category</strong> </h4>
+            <div class="input-group mt-2 mb-3">
+                <span class="input-group-text" id="basic-addon1" style="width: 100px;">Name</span>
+                <input type="text" class="form-control" placeholder="Category name" [(ngModel)]="category.name" name="name" aria-label="name" aria-describedby="basic-addon1">
+            </div>
+            <div class="text-center">
+                <a type="submit" (click)="submit()" class="btn btn-primary fadeIn fourth" style="background-color: #EF7F2D; color: white;" >Add</a>
+            </div>
+            <div *ngIf="errorMessage" class="alert alert-danger" role="alert"> {{errorMessage}}</div>
+        </div>
+                        
+    </div>
+</div>

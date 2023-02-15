@@ -28,9 +28,11 @@ export class BasketCreateComponent implements OnInit {
   ngOnInit(): void {
     this.basketService.getAll().subscribe(
       data =>{
+        console.log("data get all basket in basket-create")
         console.log(data)
       },
       err => {
+        console.log("err get all basket in basket-create")
         console.log(err)
       }
     )
@@ -39,7 +41,7 @@ export class BasketCreateComponent implements OnInit {
   createBasket(): void{
     
     console.log(this.basket)
-    this.userService.getById("4").subscribe(
+    this.userService.getById("6").subscribe(
       res => {
         let current_user = new User( res.id, 
           res.first_name,
@@ -64,20 +66,20 @@ export class BasketCreateComponent implements OnInit {
             console.log("response create basket")
             console.log(response)
             
-            let responseJson = JSON.parse(response)
-            let new_basket = new Basket(responseJson.id, responseJson.data, responseJson.quantity, responseJson.total_price, responseJson.user, responseJson.product, responseJson.is_deleted)
-            current_user.basket = new_basket
-            console.log("current_user before update")
-            console.log(current_user)
-            this.userService.update(current_user.id, current_user).subscribe(
-              res => {
-                console.log("res update user")
-                console.log(res)
-              },
-              err => {
-                console.log(err)
-              }
-            )
+            // let responseJson = JSON.parse(response)
+            // let new_basket = new Basket(responseJson.id, responseJson.data, responseJson.quantity, responseJson.total_price, responseJson.user, responseJson.product, responseJson.is_deleted)
+            // current_user.basket = new_basket
+            // console.log("current_user before update")
+            // console.log(current_user)
+            // this.userService.update(current_user.id, current_user).subscribe(
+            //   res => {
+            //     console.log("res update user")
+            //     console.log(res)
+            //   },
+            //   err => {
+            //     console.log(err)
+            //   }
+            // )
 
             //Update user to have the Basket that we created
             

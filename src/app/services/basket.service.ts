@@ -29,8 +29,8 @@ export class BasketService {
   create(data:any):Observable<any>{
     return this.http.post(API_GET_BASKETS, data, {responseType:'text' as 'json'})
   }
-  update(id: number, data: any): Observable<string> {
-    return this.http.put<string>(`${API_GET_BASKETS}/${id}`, data,{responseType: 'text' as 'json'});
+  update(id: number, id_product: number): Observable<string> {
+    return this.http.put<string>(`${API_GET_BASKETS}/${id}`, id_product,{responseType: 'text' as 'json'});
   }
   delete(id: number): Observable<string> {
     return this.http.delete<string>(`${API_GET_BASKETS}/${id}`, {responseType: 'text' as 'json'});

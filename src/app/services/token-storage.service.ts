@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Token} from '../model/token'
 
-const TOKEN_KEY = 'auth-token'
+const TOKEN_KEY = '@zeRtYO0!'
 
 @Injectable({
   providedIn: 'root'
@@ -43,9 +43,17 @@ export class TokenStorageService {
   public getUsername(): string|null{
     const token = this.getToken();
     if (token) {
-      //return token.roles.includes(role);
+      return token.username;
     }
     return null;
   }
+  public hasRole(role:string): boolean | null {
+    const token=this.getToken();
+    if (token) {
+      return token.roles == role;
+    }
+    return null;
+  }
+    
   
 }
