@@ -18,7 +18,7 @@ import { User } from 'src/app/model/user';
 })
 export class ProductDetailComponent implements OnInit {
 
-  selectedProduct = new Product(0, '', '', 0, 0, 0, 0, 0, [],0 , false);
+  selectedProduct = new Product(0, '', '', 0, 0, 0, 0, 0, [],0, 0 , false);
   currentIndex:string = "99"
   errormessage?: string;
   panier_product ?: number[];
@@ -47,7 +47,7 @@ export class ProductDetailComponent implements OnInit {
       this.productService.getById(this.currentIndex).subscribe(
         data => {
           // this.selectedProduct = data
-          this.selectedProduct = new Product(data.id, data.name, data.description, data.buying_price, data.selling_price, data.stock, data.stock_available, data.weight, data.images, data.selected_quantity, data.is_deleted, data.category, data.order, data.basket)
+          this.selectedProduct = new Product(data.id, data.name, data.description, data.buying_price, data.selling_price, data.stock, data.stock_available, data.weight, data.images, data.selected_quantity, data.founisseur_id, data.is_deleted, data.category, data.order, data.basket)
           console.log("data in product-detail")
           console.log(data)
           console.log(this.selectedProduct)
@@ -83,7 +83,9 @@ export class ProductDetailComponent implements OnInit {
 
   updateBasket(id:number){
     //Find the login user
-    this.userService.getById("4").subscribe(
+    if(this.tokenStorageService.getUsername() != null){
+      let email = this.tokenStorageService.getUsername() || ''
+      this.userService.getByEmail(email).subscribe(
       res => {
         let user = new User(res.id, res.first_name, res.last_name, res.phone, res.address, res.credit_card, res.email, res.password, res.role, res.is_deleted, res.order, res.payment, res.basket)
         console.log("user in updateBasket")
@@ -113,7 +115,7 @@ export class ProductDetailComponent implements OnInit {
                   res =>{
                     console.log("res get assosieted product")
                     console.log(res)
-                    let product_to_add = new Product(res.id, res.name, res.description, res.buying_price, res.selling_price, res.stock, res.stock_available, res.weight, res.images, res.selected_quantity, res.is_deleted, res.category, res.order, res.basket)
+                    let product_to_add = new Product(res.id, res.name, res.description, res.buying_price, res.selling_price, res.stock, res.stock_available, res.weight, res.images, res.selected_quantity, res.fournisseur, res.is_deleted, res.category, res.order, res.basket)
                     console.log("product_to_add")
                     console.log(product_to_add)
                     // verifier est ce que le panier a deja le produit
@@ -132,7 +134,6 @@ export class ProductDetailComponent implements OnInit {
                           console.log(res)
                         }
                       )
-                    
                   },
                   err =>{
                     console.log(err)
@@ -152,9 +153,12 @@ export class ProductDetailComponent implements OnInit {
       err => {
 
       }
-    )
+    )}
+    else {
+      console.log("no login found")
+    }
   }
-
+  
   deleteProduct(id:number){
 
     if (id) {
@@ -163,7 +167,7 @@ export class ProductDetailComponent implements OnInit {
         res => {
           console.log("res get product in delete product")
           console.log(res)
-          const suppressedProduct = new Product(res.id, res.name, res.description, res.buying_price, res.selling_price, res.stock, res.stock_available, res.weight, res.images, res.selected_quantity, true, res.category, res.order, res.basket)
+          const suppressedProduct = new Product(res.id, res.name, res.description, res.buying_price, res.selling_price, res.stock, res.stock_available, res.weight, res.images, res.selected_quantity, res.founisseur_id, true, res.category, res.order, res.basket)
           console.log("the suppressed product")
           console.log(suppressedProduct)
           this.productService.delete(id, suppressedProduct).subscribe(
@@ -237,7 +241,12 @@ export class ProductDetailComponent implements OnInit {
   }
 
   editProduct(id:number){
-    this.router.navigate(['/product-edit']);
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        currentIndex: id
+      }
+    };
+    this.router.navigate(['/product-edit'], navigationExtras);
   }
   
   addToBasket(id:number){

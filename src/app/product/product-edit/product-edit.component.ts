@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Image } from 'src/app/model/image';
 import { Product } from 'src/app/model/product';
 import { CategoryService } from 'src/app/services/category.service';
@@ -14,7 +14,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductEditComponent implements OnInit {
 
-  product = new Product(0, '', '', 0, 0, 0, 0, 0, [], 0, false);
+  product = new Product(0, '', '', 0, 0, 0, 0, 0, [], 0, 0, false);
   currentIndex:string = "99"
   image = new Image(0, '', false, this.product)
   categories: any;
@@ -29,6 +29,7 @@ export class ProductEditComponent implements OnInit {
     private categoryService: CategoryService,
     private imageService: ImageService,
     private route: ActivatedRoute,
+    private router:Router
   ) { 
     this.currentIndex = this.route.snapshot.queryParams['currentIndex'];
     console.log(this.route.snapshot.queryParams['currentIndex'])
@@ -42,7 +43,7 @@ export class ProductEditComponent implements OnInit {
       this.productService.getById(this.currentIndex).subscribe(
         data => {
           // this.selectedProduct = data
-          this.product = new Product(data.id, data.name, data.description, data.buying_price, data.selling_price, data.stock, data.stock_available, data.weight, data.images, data.selected_quantity, data.is_deleted, data.category, data.order, data.basket)
+          this.product = new Product(data.id, data.name, data.description, data.buying_price, data.selling_price, data.stock, data.stock_available, data.weight, data.images, data.selected_quantity, data.fournisseur, data.is_deleted, data.category, data.order, data.basket)
           console.log("data in product-edit")
           console.log(data)
           console.log(this.product)
@@ -60,7 +61,7 @@ export class ProductEditComponent implements OnInit {
     // console.log("Before update the product in DB")
     // console.log(this.product)
     // console.log("this.product.images")
-    if(this.product.name && this.product.description && this.product.buying_price && this.product.stock && this.product.weight && this.product.images[0].img && this.product.category?.name){
+    if(this.product.name && this.product.description && this.product.buying_price && this.product.stock && this.product.weight && this.product.images[0].img && this.product.category?.name && this.product.fournisseur){
     this.productService.update(parseInt(this.currentIndex), this.product).subscribe(
       res =>{
         console.log("res in update product in product-edit")
@@ -73,6 +74,7 @@ export class ProductEditComponent implements OnInit {
             res =>{
               console.log("res image in update product in product-edit")
               console.log(res)
+              this.router.navigate(['/products']);
             },
             err =>{
               console.log("err image update product in product-edit")

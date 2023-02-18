@@ -18,7 +18,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ProductCreateComponent implements OnInit {
 
-  product = new Product(0, "", "", 0, 0, 0, 0, 0,[],0 , false);
+  product = new Product(0, "", "", 0, 0, 0, 0, 0,[],0, 0 , false);
   image = new Image(0, '', false, this.product)
   submitted = false;
   message:string = '';
@@ -48,17 +48,7 @@ export class ProductCreateComponent implements OnInit {
 
   createProduct(): void{
 
-    // console.log("this.product")
-    // console.log(this.product)
-    // console.log("this.image")
-    // console.log(this.image)
-    // console.log("this.selectedCategory")
-    // console.log(this.selectedCategory)
-    // console.log("this.categories")
-    // console.log(this.categories)
-
-    // this.imageService.create()
-    if(this.product.name && this.product.description && this.product.buying_price && this.product.stock && this.product.weight && this.image.img && this.selectedCategory){
+    if(this.isAdminOrFournisseur && this.product.name && this.product.description && this.product.buying_price && this.product.stock && this.product.weight && this.image.img && this.selectedCategory && this.product.fournisseur){
     this.categoryService.getById(this.selectedCategory).subscribe(
       res => {
 
@@ -67,14 +57,16 @@ export class ProductCreateComponent implements OnInit {
         
         this.product.selling_price = this.product.buying_price + this.product.buying_price*0.01
         this.product.stock_available = this.product.stock
+        console.log("this.product before adding it")
+        console.log(this.product)
         this.productService.create(this.product).subscribe(
           response => {
             this.submitted = true;
-            console.log("response.id After creating the new product")
-            console.log(response.id)
+            console.log("response After creating the new product")
+            console.log(response)
             let redredProduct = JSON.parse(response)
             
-            const createdProduct = new Product(redredProduct.id, redredProduct.name, redredProduct.description, redredProduct.buying_price, redredProduct.selling_price, redredProduct.stock, redredProduct.stock_available, redredProduct.weight, redredProduct.images, redredProduct.selected_quantity, redredProduct.is_deleted, redredProduct.category, redredProduct.order, redredProduct.basket)
+            const createdProduct = new Product(redredProduct.id, redredProduct.name, redredProduct.description, redredProduct.buying_price, redredProduct.selling_price, redredProduct.stock, redredProduct.stock_available, redredProduct.weight, redredProduct.images, redredProduct.selected_quantity, redredProduct.fournisseur, redredProduct.is_deleted, redredProduct.category, redredProduct.order, redredProduct.basket)
             console.log("createdProduct After creating the new product")
             console.log(createdProduct)
             this.image.product = createdProduct
@@ -84,6 +76,7 @@ export class ProductCreateComponent implements OnInit {
               res => {
                 console.log("res image")
                 console.log(res)
+                this.router.navigate(['/products']);
               },
               err =>{
                 console.log("err image")
@@ -134,6 +127,20 @@ export class ProductCreateComponent implements OnInit {
       this.isLoggedIn = true
       if(this.tokenStorageService.getRoles() == "ADMIN" || this.tokenStorageService.getRoles() == "FOURNISSEUR"){
         this.isAdminOrFournisseur = true
+      }
+      let email = this.tokenStorageService.getUsername()
+      if (email) {
+        this.userService.getByEmail(email).subscribe(
+          res => {
+            this.product.fournisseur= res.id
+            console.log("res verifyAuth this.product.fournisseur= res.id")
+            console.log(res)
+            console.log(this.product)
+          },
+          err => {
+            console.log(err)
+          }
+        )
       }
     }
     console.log("verifyAuth")

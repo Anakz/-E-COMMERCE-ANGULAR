@@ -36,6 +36,7 @@ import { CategoryListComponent } from './category/category-list/category-list.co
 import { CategoryEditComponent } from './category/category-edit/category-edit.component';
 import { CategoryDetailComponent } from './category/category-detail/category-detail.component';
 import { CategoryCreateComponent } from './category/category-create/category-create.component';
+import { ProductFournisseurComponent } from './product/product-fournisseur/product-fournisseur.component';
 
 const routes: Routes = [
 
@@ -48,6 +49,7 @@ const routes: Routes = [
   { path: 'product-detail', component: ProductDetailComponent },
   { path: 'product-create', component: ProductCreateComponent },
   { path: 'product-edit', component: ProductEditComponent },
+  { path: 'my-products', component: ProductFournisseurComponent },
 
   { path: 'welcome', component: WelcomeComponent },
   { path: 'logout', component: AuthComponent },

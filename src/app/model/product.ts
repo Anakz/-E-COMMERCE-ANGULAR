@@ -14,6 +14,7 @@ export class Product {
         public weight:number,
         public images:Array<Image>,
         public selected_quantity:number,
+        public fournisseur:number,
         public is_deleted:boolean,
         public category?:Category,
         public order?:Array<Object>,

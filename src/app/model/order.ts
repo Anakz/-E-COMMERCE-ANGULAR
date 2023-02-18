@@ -6,16 +6,16 @@ import { User } from "./user";
 export class Order {
     constructor(
         public id:number,
-        public ordered:string,
-        private shipped:string,
-        private status:string,
-        private quantity:number,
-        private delivery_price:number,
-        private total:number,
-        private is_deleted:boolean,
-        private product:Array<Product>,
-        private user:User,
-        private bill?:Bill,
-        private delivery?:Delivery,
+        public ordered:Date,
+        public shipped:Date,
+        public status:string,
+        public quantity:number,
+        public delivery_price:number,
+        public total:number,
+        public is_deleted:boolean,
+        public product:Array<Product>,
+        public user:User,
+        public bill?:Bill,
+        public delivery?:Delivery,
     ){}
 }

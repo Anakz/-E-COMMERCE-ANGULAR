@@ -1,1 +1,117 @@
-<p>order-detail works!</p>
+<div class="card-body p-4" style=" margin-left:20px;margin-right:20px;">
+
+    <div class="row">
+
+        <div class="col-lg-5">
+            <h5 class="mb-3"><a href="/products" class="text-body"><i
+                        class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
+            <hr>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <form class="mt-4">
+                            <div class="row mb-4">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1" style="width: 100px;">First
+                                        Name</span>
+                                    <input type="text" class="form-control" style="background-color: #fff;" disabled
+                                        placeholder="First Name" [(ngModel)]="connectedUser.first_name"
+                                        name="first_name" aria-label="first_name" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1" style="width: 100px;">Last
+                                        Name</span>
+                                    <input type="text" class="form-control" style="background-color: #fff;" disabled
+                                        placeholder="Last Name" [(ngModel)]="connectedUser.last_name" name="last_name"
+                                        aria-label="last_name" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1" style="width: 100px;">Email</span>
+                                    <input type="text" class="form-control" style="background-color: #fff;" disabled
+                                        placeholder="email" [(ngModel)]="connectedUser.email" name="email"
+                                        aria-label="email" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1"
+                                        style="width: 100px;">Address</span>
+                                    <input type="text" class="form-control" style="background-color: #fff;" disabled
+                                        placeholder="address" [(ngModel)]="connectedUser.address" name="address"
+                                        aria-label="address" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1" style="width: 100px;">Phone</span>
+                                    <input type="text" class="form-control" style="background-color: #fff;" disabled
+                                        placeholder="phone" [(ngModel)]="connectedUser.phone" name="phone"
+                                        aria-label="phone" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1" style="width: 100px;">Credit
+                                        Card</span>
+                                    <input type="text" class="form-control" style="background-color: #fff;" disabled
+                                        placeholder="Credit Card" [(ngModel)]="connectedUser.credit_card"
+                                        name="credit_card" aria-label="credit_card" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-lg-7">
+
+            <div class="card bg-primary text-white rounded-3" style="border-color:#EF7F2D">
+                <div class="card-body" style="background-color:#EF7F2D; border-style:none">
+                    <p class="small mb-2">Card type</p>
+                    <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-mastercard fa-2x me-2"></i></a>
+                    <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-visa fa-2x me-2"></i></a>
+                    <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-amex fa-2x me-2"></i></a>
+                    <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-paypal fa-2x"></i></a>
+                    <hr class="my-4">
+                    <h4 style="text-align:center;"><b>Your order</b></h4>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2"><b>
+                                <h5>Product</h5>
+                            </b></p>
+                        <p class="mb-2"><b>
+                                <h5>Price</h5>
+                            </b></p>
+                    </div>
+                    <div class="d-flex justify-content-between" *ngFor="let product of products">
+                        <p class="mb-2">{{product.name}}</p>
+                        <p class="mb-2">${{product.selected_quantity * product.selling_price}}</p>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2">Subtotal</p>
+                        <p class="mb-2">${{Subtotal()}}</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2">Delivery</p>
+                        <p class="mb-2">$20.00</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-4">
+                        <p class="mb-2">Total(Incl. taxes)</p>
+                        <p class="mb-2">${{Subtotal()+20}}</p>
+                    </div>
+
+                    <button (click)="addBillandDelivery()" type="button" class="btn btn-info btn-block btn-lg"
+                        style="background-color:#f8f8f8;border-color:#99B19C;">
+                        <div class="d-flex justify-content-between">
+                            <span>${{Subtotal()+20}}&nbsp;</span>
+                            <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                        </div>
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

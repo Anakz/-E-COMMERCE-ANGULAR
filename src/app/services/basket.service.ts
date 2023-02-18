@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../model/user';
+import { Product } from '../model/product';
 
 const API_GET_BASKETS = 'http://localhost:8088/api/basket';
 
@@ -31,6 +32,9 @@ export class BasketService {
   }
   update(id: number, id_product: number): Observable<string> {
     return this.http.put<string>(`${API_GET_BASKETS}/${id}`, id_product,{responseType: 'text' as 'json'});
+  }
+  update2(id: number, product: Product): Observable<string> {
+    return this.http.put<string>(`${API_GET_BASKETS+'/product'}/${id}`, product,{responseType: 'text' as 'json'});
   }
   delete(id: number): Observable<string> {
     return this.http.delete<string>(`${API_GET_BASKETS}/${id}`, {responseType: 'text' as 'json'});

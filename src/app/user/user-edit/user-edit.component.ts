@@ -85,7 +85,7 @@ export class UserEditComponent implements OnInit {
   }
 
   goToHome(){
-
+    this.router.navigate([''])
   }
 
 }

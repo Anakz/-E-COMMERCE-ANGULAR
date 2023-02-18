@@ -43,13 +43,14 @@ export class ProductListComponent implements OnInit {
   testProduct: Array<Product> = new Array();
   errormessage?: string;
 
-  currentProduct: Product = new Product(0, '', '', 0, 0, 0, 0, 0, [], 0, false);
+  currentProduct: Product = new Product(0, '', '', 0, 0, 0, 0, 0, [], 0, 0, false);
   currentIndex = -1;
   name = ''
   isAdmin: boolean = false
   isClient: boolean = false
   isFournisseur: boolean = false
   my_basket:Basket = new Basket(0, new Date(), 0, 0, new User(6,'','', '', '', '', '', '', '', false,[], 0 ), [], false)
+  fournisseur_id = 0
 
   // Category name
   current_category?: string | null;
@@ -58,11 +59,6 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // Get the category name from the sidebar
-      // this.route.paramMap.subscribe(params => {
-      //   this.categoryName = params.get('name');
-      //   this.products = this.filterProductsByCategory(this.categoryName);
-      // });
       this.route.paramMap.subscribe(params => {
         
         this.current_category = params.get('category');
@@ -106,7 +102,7 @@ export class ProductListComponent implements OnInit {
         this.allProduct.map(item => {
           console.log("this.testProduct")
           console.log(this.testProduct)
-          this.testProduct.push(new Product(item.id, item.name, item.description, item.buying_price, item.selling_price, item.stock, item.stock_available, item.weight, item.images, item.selected_quantity, item.is_deleted))
+          this.testProduct.push(new Product(item.id, item.name, item.description, item.buying_price, item.selling_price, item.stock, item.stock_available, item.weight, item.images, item.selected_quantity, item.fournisseur, item.is_deleted))
         })
 
         console.log("data")
@@ -131,7 +127,7 @@ export class ProductListComponent implements OnInit {
         console.log("current_category----------------------------------------------------------")
         console.log(current_category)
         this.allProduct = products.filter((item:any) => {
-          let product = new Product(item.id, item.name, item.description, item.buying_price, item.selling_price, item.stock, item.stock_available, item.weight, item.images, item.selected_quantity, item.is_deleted, item.category, item.order, item.basket)
+          let product = new Product(item.id, item.name, item.description, item.buying_price, item.selling_price, item.stock, item.stock_available, item.weight, item.images, item.selected_quantity, item.fournisseur, item.is_deleted, item.category, item.order, item.basket)
           console.log("product.category")
           console.log(product.category)
           console.log("product")
@@ -214,18 +210,18 @@ export class ProductListComponent implements OnInit {
               })
               console.log("Check produit")
               console.log(check_product)
-              if(!check_product)
-              {  
                 this.productService.getById(id.toString()).subscribe(
                   res =>{
                     console.log("res get assosieted product")
                     console.log(res)
-                    let product_to_add = new Product(res.id, res.name, res.description, res.buying_price, res.selling_price, res.stock, res.stock_available, res.weight, res.images, res.is_deleted, res.selected_quantity, res.category, res.order, res.basket)
+                    let product_to_add = new Product(res.id, res.name, res.description, res.buying_price, res.selling_price, res.stock, res.stock_available, res.weight, res.images, res.selected_quantity, res.fournisseur, res.is_deleted, res.category, res.order, res.basket)
                     console.log("product_to_add")
                     console.log(product_to_add)
                     // verifier est ce que le panier a deja le produit
                     console.log("check_product")
                     console.log(check_product)
+                    //Here to change--------------------------------
+                    if (!check_product) {
                       current_basket.product.push(product_to_add)
                       console.log("current_basket after pushing the new product")
                       console.log(current_basket)
@@ -236,17 +232,34 @@ export class ProductListComponent implements OnInit {
                         },
                         err =>{
                           console.log("err update current basket")
-                          console.log(res)
+                          console.log(err)
                         }
                       )
+                    } else{
+                      current_basket.product.map((product:Product) => {
+                        if (product.id == product_to_add.id) {
+                          console.log("hahahaa you Got me")
+                          product.selected_quantity = product.selected_quantity+1
+                          product_to_add.selected_quantity = product_to_add.selected_quantity+1
+                          this.basketService.update2(current_basket.id, product_to_add).subscribe(
+                            res => {
+                              console.log("res update current basket")
+                              console.log(res)
+                            },
+                            err =>{
+                              console.log("err update current basket")
+                              console.log(err)
+                            }
+                          )
+                        }
+                      })
+                    }
+                      
                   },
                   err =>{
                     console.log(err)
                   }
-                )}
-                else{
-                  console.log("else")
-                }
+                )
             },
             err => {
 
@@ -263,58 +276,6 @@ export class ProductListComponent implements OnInit {
       console.log("no login found")
     }
   }
-
-  /*addToBasket(id:string){
-    console.log(id)
-    console.log("This is the product-list to add a product to the front basket")
-
-    let panier = localStorage.getItem("products")
-    console.log("panier")
-    console.log(panier)
-    
-
-    if ( panier != null) {
-      this.panier_product = JSON.parse(panier)
-      if (id) {
-
-        if (this.panier_product) {
-          let table = this.panier_product;
-          if (table) {
-              console.log('table.includes(id)')
-              console.log(table.includes(parseInt(id)))
-              if (!table.includes(parseInt(id))) {
-                
-                console.log("table in if")
-                console.log(table)
-                table.push(parseInt(id))
-                
-                localStorage.removeItem("products")
-                localStorage.setItem("products", JSON.stringify(table));
-                console.log("localStorage.getItem('products') in product-list")
-                console.log(localStorage.getItem("products"))
-              }
-              else {
-                console.log("product already existe in basket")
-                this.product_exist = true
-              }
-            }
-
-          console.log("table")
-          console.log(table)
-          
-          console.log("id")
-          console.log(id)
-        }
-          
-
-      }
-    }
-
-    // const test = JSON.parse(localStorage.getItem("products"))
-    // console.log("test")
-    // console.log(test)
-
-  }*/
 
 
   goToProductCreate(){
@@ -336,7 +297,7 @@ export class ProductListComponent implements OnInit {
         res => {
           console.log("res get product in delete product")
           console.log(res)
-          const suppressedProduct = new Product(res.id, res.name, res.description, res.buying_price, res.selling_price, res.stock, res.stock_available, res.weight, res.images, res.selected_quantity, true, res.category, res.order, res.basket)
+          const suppressedProduct = new Product(res.id, res.name, res.description, res.buying_price, res.selling_price, res.stock, res.stock_available, res.weight, res.images, res.selected_quantity, res.fournisseur, true, res.category, res.order, res.basket)
           console.log("the suppressed product")
           console.log(suppressedProduct)
           this.productService.delete(id, suppressedProduct).subscribe(

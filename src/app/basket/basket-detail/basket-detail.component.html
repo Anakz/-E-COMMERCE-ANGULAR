@@ -1,4 +1,4 @@
-<p>basket-detail works!</p>
+<!-- <p>basket-detail works!</p> -->
 
 <div *ngIf="products && products.length >0 ">
     <br>
@@ -10,6 +10,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
                     <th scope="col">Weight</th>
+                    <th scope="col">Quantity</th>
                 </tr>
             </thead>
             <tbody>
@@ -18,12 +19,13 @@
                         <img src={{product.images[0].img}} style="width: 100px;" class="card-img-top rounded float-start" alt={{product.name}}>
                     </td>
                     <ng-template #hiddenText>
-                        <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/amazon-tech-products-2021-1635430982.jpg" style="height: 200px;" class="card-img-top rounded float-start" alt={{product.name}}>
+                        <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/amazon-tech-products-2021-1635430982.jpg" style="width: 100px;" class="card-img-top rounded float-start" alt={{product.name}}>
                     </ng-template>
                     <td>{{product.name}}</td>
                     <td>{{product.buying_price}}</td>
                     <td>{{product.weight}}</td>
                     <td>{{product.fonction}}</td>
+                    <td>{{product.selected_quantity}}</td>
                 </tr>
                 <tr>
                     <!-- <a [routerLink]="['/',{ outlets: { primary: ['navbar'],contenu: ['create'] } }]" *ngIf="isAdmin">
@@ -32,6 +34,12 @@
                 </tr>
             </tbody>
         </table>
+        <button (click)="addOrder()" type="button" class="btn btn-info btn-block btn-lg" style="background-color:#f8f8f8;border-color:#99B19C;color:black">
+            <div class="d-flex justify-content-between">
+              <span>${{Total()}}</span>
+              <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2" ></i></span>
+          </div>
+          </button>
     </div>
 </div>
 

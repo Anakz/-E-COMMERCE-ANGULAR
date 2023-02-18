@@ -43,6 +43,7 @@ import { CategoryCreateComponent } from './category/category-create/category-cre
 import { CategoryDetailComponent } from './category/category-detail/category-detail.component';
 import { CategoryEditComponent } from './category/category-edit/category-edit.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
+import { ProductFournisseurComponent } from './product/product-fournisseur/product-fournisseur.component';
   
 
 @NgModule({
@@ -85,6 +86,7 @@ import { CategoryListComponent } from './category/category-list/category-list.co
     CategoryDetailComponent,
     CategoryEditComponent,
     CategoryListComponent,
+    ProductFournisseurComponent,
   
   ],
   imports: [
