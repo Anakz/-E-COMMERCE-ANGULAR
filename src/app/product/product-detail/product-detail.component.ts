@@ -109,8 +109,6 @@ export class ProductDetailComponent implements OnInit {
               })
               console.log("Check produit")
               console.log(check_product)
-              if(!check_product)
-              {  
                 this.productService.getById(id.toString()).subscribe(
                   res =>{
                     console.log("res get assosieted product")
@@ -121,6 +119,8 @@ export class ProductDetailComponent implements OnInit {
                     // verifier est ce que le panier a deja le produit
                     console.log("check_product")
                     console.log(check_product)
+                    //Here to change--------------------------------
+                    if (!check_product) {
                       current_basket.product.push(product_to_add)
                       console.log("current_basket after pushing the new product")
                       console.log(current_basket)
@@ -128,20 +128,39 @@ export class ProductDetailComponent implements OnInit {
                         res => {
                           console.log("res update current basket")
                           console.log(res)
+                          alert("Product added to the Cart")
                         },
                         err =>{
                           console.log("err update current basket")
-                          console.log(res)
+                          console.log(err)
                         }
                       )
+                    } else{
+                      current_basket.product.map((product:Product) => {
+                        if (product.id == product_to_add.id) {
+                          console.log("hahahaa you Got me")
+                          product.selected_quantity = product.selected_quantity+1
+                          product_to_add.selected_quantity = product_to_add.selected_quantity+1
+                          this.basketService.update2(current_basket.id, product_to_add).subscribe(
+                            res => {
+                              alert("Product added to the Cart")
+                              console.log("res update current basket")
+                              console.log(res)
+                            },
+                            err =>{
+                              console.log("err update current basket")
+                              console.log(err)
+                            }
+                          )
+                        }
+                      })
+                    }
+                      
                   },
                   err =>{
                     console.log(err)
                   }
-                )}
-                else{
-                  console.log("else")
-                }
+                )
             },
             err => {
 
@@ -155,6 +174,7 @@ export class ProductDetailComponent implements OnInit {
       }
     )}
     else {
+      alert("Please, log in to add a product to your cart")
       console.log("no login found")
     }
   }

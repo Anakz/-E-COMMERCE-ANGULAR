@@ -132,7 +132,7 @@ export class OrderDetailComponent implements OnInit {
           this.basketService.delete(this.userbasket.id).subscribe(
           res =>{
             console.log("after update data:",res);
-          
+
           },
           error => {
           console.log(error);

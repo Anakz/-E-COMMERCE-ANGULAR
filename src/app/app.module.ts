@@ -44,6 +44,7 @@ import { CategoryDetailComponent } from './category/category-detail/category-det
 import { CategoryEditComponent } from './category/category-edit/category-edit.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { ProductFournisseurComponent } from './product/product-fournisseur/product-fournisseur.component';
+import { FooterComponent } from './footer/footer.component';
   
 
 @NgModule({
@@ -87,6 +88,7 @@ import { ProductFournisseurComponent } from './product/product-fournisseur/produ
     CategoryEditComponent,
     CategoryListComponent,
     ProductFournisseurComponent,
+    FooterComponent,
   
   ],
   imports: [

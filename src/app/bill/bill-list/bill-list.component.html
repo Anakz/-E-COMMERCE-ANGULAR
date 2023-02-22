@@ -1,1 +1,93 @@
-<p>bill-list works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="h5 mb-4 text-center"><b>My bill</b></h3>
+
+            <div *ngIf="bills.length >0 " >
+            <table class="table">
+                <thead class="thead-primary" style="background-color: #EF7F2D;">
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Delivery price</th>
+                        <th>Total paid</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr class="alert mb-5" role="alert" *ngFor="let array of bills">
+                            <td>
+                            </td>
+                            <td>
+                                <ng-container *ngFor="let bill of array.order.product">
+                                    <div class="img" style="background-image: url({{bill.images[0].img}});"></div>
+    
+                                    <div *ngIf="bill.images[0]; else hiddenText">
+                                        <img src={{bill.images[0].img}} style="height: 40px;"
+                                            class="card-img-top rounded float-start" alt={{bill.name}}>
+                                    </div>
+                                    <ng-template #hiddenText>
+                                        <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/amazon-tech-products-2021-1635430982.jpg"
+                                            style="height: 40px;" class="card-img-top rounded float-start"
+                                            alt={{bill.name}}>
+                                    </ng-template>
+                                    <br>
+                                    <!--  {{product.images[0].img}} -->
+                                </ng-container></td>
+                            <td>
+    
+                                <div class="email">
+                                    <ng-container *ngFor="let bill of array.order.product">
+                                        <span>{{bill.name}} </span>
+                                        <br>
+                                        <br>
+                                        <span></span>
+                                    </ng-container>
+                                </div>
+                            </td>
+                            <td>
+                                <ng-container *ngFor="let bill of array.order.product">
+                                    {{bill.selling_price}}<br>
+                                    <br>
+                                </ng-container>
+                                <hr>
+                            </td>
+                            <td class="quantity">
+                                <div class="input-group">
+                                    <ng-container *ngFor="let bill of array.order.product">
+                                        &nbsp;&nbsp;&nbsp; {{bill.selected_quantity}}
+                                        <br>
+                                        <br>
+                                    </ng-container>
+                                </div>
+                                <hr>
+                            </td>
+                            <td>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20$
+                            </td>
+                            <td>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;{{array.total_price}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div *ngIf="bills.length ==0 " class="text-center">
+                <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <div>
+                    no bill was found in your bill list
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

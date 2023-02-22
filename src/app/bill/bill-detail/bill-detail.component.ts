@@ -71,4 +71,12 @@ export class BillDetailComponent implements OnInit {
     }
   }
 
+  goToBillList(){
+    this.router.navigate(['/bill-list']);
+  }
+  goToHome(){
+    this.router.navigate(['']);
+  }
+
+
 }

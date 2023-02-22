@@ -1,38 +1,76 @@
-<!-- <p>bill-detail works!</p> -->
-<body >
-    <section class="ftco-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 class="h5 mb-4 text-center"><b>My bills</b></h3>
-                    
-                    <table class="table">
-                        <thead class="thead-primary" style="background-color: #EF7F2D;">
-                          <tr>
-                              <th>&nbsp;</th>
-                              <th>&nbsp;</th>
-                              <th>Product</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Delivery price</th>
-                            <th>Total paid</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr >
-                            <td *ngFor="let product of products">{{product.name}}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>{{bill.total_price}}</tr>
-                        </tbody>
-                    </table>
-                    
-                </div>
-            </div>
-        </div>
-    </section>
 
-    </body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="h5 mb-4 text-center"><b>My bill</b></h3>
+            
+      <table class="table">
+        <thead class="thead-primary" style="background-color: #EF7F2D;">
+          <tr>
+              <th>&nbsp;</th>
+              <th>&nbsp;</th>
+              <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Delivery price</th>
+            <th>Total paid</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="alert" role="alert">
+            <td>
+            </td>
+            <td>
+              <ng-container *ngFor="let prod of products">
+                <div  *ngIf="prod.images[0]; else hiddenText">
+                  <img src={{prod.images[0].img}} style="height: 40px;" class="card-img-top rounded float-start" alt={{prod.name}}>
+                </div>
+                <ng-template #hiddenText>
+                  <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/amazon-tech-products-2021-1635430982.jpg" style="height: 40px;" class="card-img-top rounded float-start" alt={{prod.name}}>
+                </ng-template>
+                <br>
+              </ng-container>
+            </td>
+            <td>
+              <div class="email">
+                  <ng-container *ngFor="let prod of products">
+                  <span>{{prod.name}} </span>
+                  <span></span>
+                </ng-container>
+              </div>
+            </td>
+            <td>
+              <ng-container *ngFor="let prod of products">{{prod.selling_price}}
+                <br>
+                <br>
+              </ng-container>
+            </td>
+            <td class="quantity">
+              <div class="input-group"><ng-container *ngFor="let prod of products">
+                  &nbsp;&nbsp;&nbsp; {{prod.selected_quantity}}
+                  <br>
+                  <br>
+                </ng-container>
+              </div>
+            </td>
+            <td>
+              <br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {{bill.order.delivery_price}}
+            </td>
+            <td>
+              <br>
+              &nbsp;&nbsp;&nbsp;{{bill.total_price}}
+            </td>	
+          </tr>
+        </tbody>
+      </table>
+      <div class="text-center">
+        <strong>
+          <a *ngIf="isLoggedIn" title="Bill List" class="m-2" style="color: #EF7F2D;" role="button" (click)="goToBillList()"><i class="fa-solid fa-list"></i></a>
+          <a (click)="goToHome()" title="Home page" style="color: #EF7F2D;" class="m-2" role="button"><i class="fa-solid fa-house"></i></a>
+        </strong>
+      </div>
+    </div>
+  </div>
+</div>

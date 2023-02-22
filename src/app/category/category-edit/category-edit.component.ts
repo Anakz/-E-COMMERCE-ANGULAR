@@ -62,7 +62,7 @@ export class CategoryEditComponent implements OnInit {
     }
   }
   goToCategoryList(){
-
+    this.router.navigate(['/category-list']);
   }
   authVerify(){
     if (this.tokenStorageService.hasRole('ADMIN')) {

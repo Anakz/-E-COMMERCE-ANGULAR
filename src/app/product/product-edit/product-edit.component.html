@@ -37,7 +37,7 @@
                             <input type="text" class="form-control" id="weight" required [(ngModel)]="product.images[0].img" name="image" />
                         </div>
                         <ng-template #hiddenText >
-                            <input type="text" class="form-control" id="weight" required name="image" />
+                            <input type="text" class="form-control" id="weight" required [(ngModel)]="editedImage.img" name="image" />
                         </ng-template>
                     </div>
                     <div class="form-group">
@@ -63,8 +63,8 @@
                     </div> -->
 
                     <br>
-                    <button (click)="updateProduct()" class="btn"
-                        style="background-color: #EF7F2D; color: white;">Create</button>
+                    <button title="Save" (click)="updateProduct()" class="btn m-2" style="background-color: #EF7F2D; color: white;"><i class="fa-solid fa-floppy-disk"></i></button>
+                    <button title="Detail Product" (click)="detailProduct()" class="btn m-2" style="background-color: #EF7F2D; color: white;"><i class="fa-solid fa-circle-info"></i></button>
                     <div *ngIf="errorMessage" class="alert alert-danger" role="alert"> {{errorMessage}}</div>
                 </div>
                 <br>

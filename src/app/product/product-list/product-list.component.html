@@ -36,7 +36,6 @@
 
                         <a (click)="editProduct(product.id); $event.stopPropagation();" class="m-2" ><i style="color: #EF7F2D;" class="fa-solid fa-pen-to-square fa-2x"></i></a>
                         <a (click)="deleteProduct(product.id); $event.stopPropagation();" class="m-2"><i style="color: #EF7F2D;" class="fa-solid fa-trash fa-2x  my-hover"></i></a>
-
                     </div>
                 </div>
                 <div  *ngIf="isAdmin" class="card-body" style="margin-top: 30px;">
@@ -64,16 +63,28 @@
                         <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/amazon-tech-products-2021-1635430982.jpg" style="height: 200px;" class="card-img-top rounded float-start" alt={{product.name}}>
                     </ng-template>
 
-                    <div class="d-flex justify-content-between position-absolute" style="top: 80%; left: 20%;">
+                    <div *ngIf="!isAdmin">
+                        <div class="text-center justify-content-between" style="top: 80%; left: 20%;" >
+                            <a (click)="goToProductDetail(product.id); $event.stopPropagation();" style="padding: 25px;"><i style="color: #EF7F2D;" class="fa-solid fa-circle-info fa-2x  my-hover"></i></a>
+                            <a  (click)="updateBasket(product.id); $event.stopPropagation();" style="padding: 25px;" ><i style="color: #EF7F2D;" class="fa-sharp fa-solid fa-cart-plus fa-2x"></i></a>
+                            <!-- <a (click)="test(); $event.stopPropagation();" class="m-2" ><i style="color: #EF7F2D;" class="fa-sharp fa-solid fa-cart-plus fa-2x"></i></a> -->
+                        </div>
+                    </div>
+
+                    <div *ngIf="isAdmin" class="d-flex justify-content-between position-absolute" style="top: 100%; left: 20%;">
                         <a (click)="goToProductDetail(product.id); $event.stopPropagation();" class="m-2"><i style="color: #EF7F2D;" class="fa-solid fa-circle-info fa-2x  my-hover"></i></a>
                         <a (click)="updateBasket(product.id); $event.stopPropagation();" class="m-2" ><i style="color: #EF7F2D;" class="fa-sharp fa-solid fa-cart-plus fa-2x"></i></a>
 
                         <a (click)="editProduct(product.id); $event.stopPropagation();" class="m-2" ><i style="color: #EF7F2D;" class="fa-solid fa-pen-to-square fa-2x"></i></a>
                         <a (click)="deleteProduct(product.id); $event.stopPropagation();" class="m-2"><i style="color: #EF7F2D;" class="fa-solid fa-trash fa-2x  my-hover"></i></a>
-
                     </div>
                 </div>
-                <div class="card-body">
+                <div  *ngIf="isAdmin" class="card-body" style="margin-top: 30px;">
+                    <h5 class="card-title text-center">{{product.name}}</h5>
+                    <p class="card-text text-center">{{product.selling_price}} $</p>
+                    <!-- <a href="#" class="btn btn-primary" (click)="goProductList()">Go somewhere</a> -->
+                </div>
+                <div  *ngIf="!isAdmin" class="card-body" style="margin-top: -10px;">
                     <h5 class="card-title text-center">{{product.name}}</h5>
                     <p class="card-text text-center">{{product.selling_price}} $</p>
                     <!-- <a href="#" class="btn btn-primary" (click)="goProductList()">Go somewhere</a> -->

@@ -18,7 +18,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ProductCreateComponent implements OnInit {
 
-  product = new Product(0, "", "", 0, 0, 0, 0, 0,[],0, 0 , false);
+  product = new Product(0, "", "", 0, 0, 0, 0, 0,[], 1, 0 , false);
   image = new Image(0, '', false, this.product)
   submitted = false;
   message:string = '';
@@ -55,7 +55,7 @@ export class ProductCreateComponent implements OnInit {
         let currentCategory = new Category(res.id, res.name, res.is_deleted, res.product)
         this.product.category = currentCategory
         
-        this.product.selling_price = this.product.buying_price + this.product.buying_price*0.01
+        this.product.selling_price = (this.product.buying_price/0.91)
         this.product.stock_available = this.product.stock
         console.log("this.product before adding it")
         console.log(this.product)

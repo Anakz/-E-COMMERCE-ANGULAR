@@ -229,6 +229,7 @@ export class ProductListComponent implements OnInit {
                         res => {
                           console.log("res update current basket")
                           console.log(res)
+                          alert("Product added to the Cart")
                         },
                         err =>{
                           console.log("err update current basket")
@@ -243,6 +244,7 @@ export class ProductListComponent implements OnInit {
                           product_to_add.selected_quantity = product_to_add.selected_quantity+1
                           this.basketService.update2(current_basket.id, product_to_add).subscribe(
                             res => {
+                              alert("Product added to the Cart")
                               console.log("res update current basket")
                               console.log(res)
                             },
@@ -273,6 +275,7 @@ export class ProductListComponent implements OnInit {
       }
     )}
     else {
+      alert("Please, log in to add a product to your cart")
       console.log("no login found")
     }
   }
@@ -305,17 +308,19 @@ export class ProductListComponent implements OnInit {
               console.log("res update product in delete product")
               console.log(res)
               if (this.products.length >0) {
-                let index_product_to_delete = this.products.findIndex((product: any) => {
-                  product == id
+                let index_product_to_delete = this.products.findIndex((product: Product) => {
+                  product.id == id
                 })
                 this.products.splice(index_product_to_delete, 1)
+                alert("Product deleted")
                 if (this.allProduct.length > 0) {
                   console.log("if (this.allProduct.length > 0)")
                   console.log(this.allProduct.length)
-                  let index_allProduct_to_delete = this.allProduct.findIndex((product: any) => {
-                    product == id
+                  let index_allProduct_to_delete = this.allProduct.findIndex((product: Product) => {
+                    product.id == id
                   })
                   this.allProduct.splice(index_allProduct_to_delete, 1)
+                  alert("Product deleted")
                   console.log("new this.allPproduct")
                   console.log(this.allProduct)
                 }
@@ -328,17 +333,23 @@ export class ProductListComponent implements OnInit {
               console.log("err in delete product")
               console.log(err)
               if (this.products.length >0) {
-                let index_product_to_delete = this.products.findIndex((product: any) => {
-                  product == id
+                let index_product_to_delete = this.products.findIndex((product: Product) => {
+                  console.log("product && id")
+                  console.log(product.id +" && "+ id)
+                  return product.id === id
                 })
+                console.log("index_product_to_delete")
+                console.log(index_product_to_delete)
                 this.products.splice(index_product_to_delete, 1)
+                alert("Product deleted")
                 if (this.allProduct.length > 0) {
                   console.log("if (this.allProduct.length > 0)")
                   console.log(this.allProduct.length)
-                  let index_allProduct_to_delete = this.allProduct.findIndex((product: any) => {
-                    product == id
+                  let index_allProduct_to_delete = this.allProduct.findIndex((product: Product) => {
+                    return product.id == id
                   })
                   this.allProduct.splice(index_allProduct_to_delete, 1)
+                  alert("Product deleted")
                   console.log("new this.allPproduct")
                   console.log(this.allProduct)
                 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Image } from 'src/app/model/image';
 import { Product } from 'src/app/model/product';
 import { CategoryService } from 'src/app/services/category.service';
@@ -17,6 +17,7 @@ export class ProductEditComponent implements OnInit {
   product = new Product(0, '', '', 0, 0, 0, 0, 0, [], 0, 0, false);
   currentIndex:string = "99"
   image = new Image(0, '', false, this.product)
+  editedImage = new Image(0, '', false, this.product)
   categories: any;
 
   errorMessage: string = ''
@@ -59,9 +60,14 @@ export class ProductEditComponent implements OnInit {
   }
   updateProduct(){
     // console.log("Before update the product in DB")
-    // console.log(this.product)
-    // console.log("this.product.images")
-    if(this.product.name && this.product.description && this.product.buying_price && this.product.stock && this.product.weight && this.product.images[0].img && this.product.category?.name && this.product.fournisseur){
+    console.log("this.product")
+    console.log(this.product)
+    if (this.editedImage.img != '') {
+      this.product.images.push(this.editedImage)
+      console.log("this.product.images")
+      console.log(this.product.images)
+    }
+    if(this.currentIndex != '99' && this.currentIndex != undefined && this.product.name && this.product.description && this.product.buying_price && this.product.stock && this.product.weight && this.product.images[0].img && this.product.category?.name && this.product.fournisseur){
     this.productService.update(parseInt(this.currentIndex), this.product).subscribe(
       res =>{
         console.log("res in update product in product-edit")
@@ -70,17 +76,36 @@ export class ProductEditComponent implements OnInit {
           let updated_image = new Image(this.product.images[0].id, this.product.images[0].img, this.product.images[0].is_deleted, this.product)
           console.log("updated_image")
           console.log(updated_image)
-          this.imageService.update(updated_image.id, updated_image).subscribe(
-            res =>{
-              console.log("res image in update product in product-edit")
-              console.log(res)
-              this.router.navigate(['/products']);
-            },
-            err =>{
-              console.log("err image update product in product-edit")
-              console.log(err)
-            }
-          )
+          if (this.editedImage.id == 0) {
+            this.imageService.create(updated_image).subscribe(
+              res => {
+                console.log("res image")
+                console.log(res)
+                const navigationExtras: NavigationExtras = {
+                  queryParams: {
+                    currentIndex: this.currentIndex
+                  }
+                };
+                this.router.navigate(['/product-detail'], navigationExtras);
+              },
+              err =>{
+                console.log("err image")
+                console.log(err)
+              }
+            )
+          } else{
+            this.imageService.update(updated_image.id, updated_image).subscribe(
+              res =>{
+                console.log("res image in update product in product-edit")
+                console.log(res)
+                this.router.navigate(['/products']);
+              },
+              err =>{
+                console.log("err image update product in product-edit")
+                console.log(err)
+              }
+            )
+          }
         }
       },
       err => {
@@ -107,6 +132,16 @@ export class ProductEditComponent implements OnInit {
 
       }
     )
+  }
+  detailProduct() {
+    if (this.currentIndex != '99' && this.currentIndex != undefined) {
+      const navigationExtras: NavigationExtras = {
+        queryParams: {
+          currentIndex: this.currentIndex
+        }
+      };
+      this.router.navigate(['/product-detail'], navigationExtras);
+    }
   }
 
 }

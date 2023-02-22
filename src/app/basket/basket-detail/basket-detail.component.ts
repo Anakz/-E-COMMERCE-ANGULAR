@@ -75,12 +75,12 @@ export class BasketDetailComponent implements OnInit {
     if (this.basket) {
       for(let i=0;i<this.basket.product.length;i++){
       this.total =this.total+(this.basket.product[i].selected_quantity*this.basket.product[i].selling_price); 
-    }
-    this.p=this.total;
-    this.total=0;
-    console.log("this.p")
-    console.log(this.p)
-    return this.p;
+      }
+      this.p=this.total;
+      this.total=0;
+      console.log("this.p")
+      console.log(this.p)
+      return this.p;
     } 
     return 0   
   }
@@ -111,6 +111,43 @@ export class BasketDetailComponent implements OnInit {
       err => {console.log(err)}
     ) 
     console.log(order)
+  }
+  updateBasket(id:number){
+
+    if (id &&this.tokenStorageService.getUsername() != null && this.basket.id != 0) {
+      this.basketService.deleteProduct(this.basket.id, id).subscribe(
+        res =>{
+          let product_to_delete = new Product(0, '', '', 0, 0, 0, 0, 0, [], 0, 0, false);
+          this.basket.product.map((prod:Product) =>{
+            if (prod.id == id) {
+              product_to_delete = new Product(prod.id, prod.name, prod.description, prod.buying_price, prod.selling_price, prod.stock, prod.stock_available, prod.weight, prod.images, prod.selected_quantity, prod.fournisseur, true, prod.category, prod.order, prod.basket)
+            }
+          })
+          if (product_to_delete) {
+            if (product_to_delete.selected_quantity ==1) {
+              let index_product_to_delete = this.products.findIndex((product: any) => {
+                return product.id == id
+              })
+              this.products.splice(index_product_to_delete, 1)
+              alert("Product is deleted from the cart 1")
+              product_to_delete = new Product(0, '', '', 0, 0, 0, 0, 0, [], 0, 0, false);
+            } else{
+              this.products.map((prod:Product) =>{
+                if (product_to_delete.id == prod.id) {
+                  prod.selected_quantity = prod.selected_quantity-1;
+                  product_to_delete = new Product(0, '', '', 0, 0, 0, 0, 0, [], 0, 0, false);
+                  alert("Product is deleted from the cart 2")
+                }
+              })
+            }
+          }
+
+          // 
+          // 
+          
+        }, err => {}
+      )
+    }
   }
 
 }

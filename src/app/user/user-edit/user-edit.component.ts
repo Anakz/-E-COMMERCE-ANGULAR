@@ -71,6 +71,7 @@ export class UserEditComponent implements OnInit {
       res =>{
         console.log("res user-edit")
         console.log(res)
+        this.router.navigate(['/user-detail'])
       },
       err => {
         console.log("err user-edit")

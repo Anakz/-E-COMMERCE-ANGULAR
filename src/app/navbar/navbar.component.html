@@ -103,9 +103,9 @@
           <li class="nav-item">
             <a class="nav-link" role="button" routerLink="basket-detail">My Cart</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" role="button" routerLink="order-list">My Orders</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" role="button" routerLink="bill-list">My Bills</a>
           </li>
@@ -120,6 +120,7 @@
       <div class="d-flex" role="button">
         <a *ngIf="isLoggedIn" class="btn text-light" role="button" routerLink="user-detail">My Profile</a>
         <a *ngIf="!isLoggedIn" class="btn btn-outline-warning"  (click)="login()" type="submit">Login</a>
+        <a *ngIf="!isLoggedIn" class="btn btn-outline-warning"  (click)="register()" type="submit">Register</a>
         <a *ngIf="isLoggedIn" class="btn btn-outline-warning"  (click)="logout()" type="submit">Logout</a>
         <!-- <a type="button" class="btn">
           <i class="fa-solid fa-cart-shopping  fa-lg"><span class="badge text-bg-secondary">4</span></i>

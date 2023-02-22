@@ -2,7 +2,7 @@
 
 <div *ngIf="products && products.length >0 ">
     <br>
-    <div class="container">
+    <div class="container mb-5">
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -11,6 +11,7 @@
                     <th scope="col">Price</th>
                     <th scope="col">Weight</th>
                     <th scope="col">Quantity</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -24,22 +25,46 @@
                     <td>{{product.name}}</td>
                     <td>{{product.buying_price}}</td>
                     <td>{{product.weight}}</td>
-                    <td>{{product.fonction}}</td>
                     <td>{{product.selected_quantity}}</td>
+                    <td>
+                        <a (click)="updateBasket(product.id)" role="button" >
+                            <i style="color: #EF7F2D;" class="fa-solid fa-xmark"></i>
+                        </a>
+                    </td>
                 </tr>
-                <tr>
-                    <!-- <a [routerLink]="['/',{ outlets: { primary: ['navbar'],contenu: ['create'] } }]" *ngIf="isAdmin">
-                        Nouveau employé
-                    </a> -->
-                </tr>
+                <!-- <tr>
+                </tr> -->
             </tbody>
         </table>
-        <button (click)="addOrder()" type="button" class="btn btn-info btn-block btn-lg" style="background-color:#f8f8f8;border-color:#99B19C;color:black">
-            <div class="d-flex justify-content-between">
-              <span>${{Total()}}</span>
-              <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2" ></i></span>
-          </div>
-          </button>
+        <div class="card-body p-4" style="width:500px;"> 
+            <div class="row" style="width:700px; margin-left : 300px;" >
+              <div class="col-lg-5" >
+                <div class="card bg-primary text-white rounded-3" style="border-color: #EF7F2D;" >
+                  <div class="card-body" style="background-color: #EF7F2D;">
+                    <p class="small mb-2">Card type</p>
+                    <a href="#!" type="submit" class="text-white"><i
+                        class="fab fa-cc-mastercard fa-2x me-2"></i></a>
+                    <a href="#!" type="submit" class="text-white"><i
+                        class="fab fa-cc-visa fa-2x me-2"></i></a>
+                    <a href="#!" type="submit" class="text-white"><i
+                        class="fab fa-cc-amex fa-2x me-2"></i></a>
+                    <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-paypal fa-2x"></i></a> 
+                    <hr class="my-4">
+                    <div class="d-flex justify-content-between mb-4">
+                      <p class="mb-2">Total(without delivery price)</p>
+                      <p class="mb-2">${{Total()}}</p>
+                    </div>
+                    <button (click)="addOrder()" type="button" class="btn btn-info btn-block btn-lg" style="background-color:#f8f8f8;border-color:#99B19C;color:black">
+                      <div class="d-flex justify-content-between">
+                        <span>${{Total()}}</span>
+                        <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2" ></i></span>
+                    </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div> 
     </div>
 </div>
 
